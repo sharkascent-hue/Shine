@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>RealShine | Mobile Car Detailing in Louth, Cavan, Meath &amp; Monaghan</title>
 <meta name="description" content="Premium mobile car valeting and detailing. We come to your door across Louth, Cavan, Meath &amp; Monaghan. Eco-friendly products, ECO-steaming, from €110. Book by phone or WhatsApp.">
-<meta name="theme-color" content="#0B0F19">
+<meta name="theme-color" content="#0A5CFF">
 <link rel="canonical" href="https://realshine.ie/">
 
 <meta property="og:type" content="website">
@@ -25,7 +25,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <link rel="preload" as="image" href="img/mercedes-c-class-exterior-1080.webp" imagesrcset="img/mercedes-c-class-exterior-600.webp 600w, img/mercedes-c-class-exterior-1080.webp 1080w" imagesizes="(min-width: 900px) 45vw, 100vw">
 <link rel="stylesheet" href="css/style.css">
 
@@ -73,24 +73,24 @@
 
 <!-- ============ INTRO / LOADER ============ -->
 <div class="intro" id="intro" aria-hidden="true">
-  <div class="intro__panel intro__panel--top"></div>
-  <div class="intro__panel intro__panel--bottom"></div>
   <div class="intro__stage">
-    <div class="intro__bubbles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="intro__bubbles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="intro__logo"><img src="img/realshine-logo.png" width="224" height="98" alt=""><em class="intro__glint"></em></div>
-    <div class="intro__bar"><span></span></div>
+    <p class="intro__tag">Mobile valeting · We come to you</p>
   </div>
 </div>
 
 <!-- ============ PAGE-WIPE TRANSITION ============ -->
-<div class="wipe" id="wipe" aria-hidden="true"><div class="wipe__shine"></div></div>
-
-<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="wash" id="wash" aria-hidden="true">
+  <div class="wash__wave wash__wave--top"></div>
+  <div class="wash__body"><div class="bubbles bubbles--wash"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+  <div class="wash__wave wash__wave--bottom"></div>
+</div>
 
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- ============ HEADER ============ -->
-<header class="header" id="header">
+<header class="header is-scrolled" id="header">
   <div class="container header__inner">
     <a href="#top" class="brand" aria-label="RealShine home">
       <img class="brand__logo" src="img/realshine-logo.png" width="112" height="49" alt="RealShine">
@@ -116,8 +116,7 @@
   <div class="hero__bg" aria-hidden="true">
     <div class="hero__glow hero__glow--a"></div>
     <div class="hero__glow hero__glow--b"></div>
-    <div class="hero__grid"></div>
-    <div class="bubbles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="bubbles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   </div>
 
   <div class="container hero__inner">
@@ -126,12 +125,12 @@
       <h1 class="hero__title">
         <span class="line"><span class="hero__in" style="--d:1">Showroom shine,</span></span>
         <span class="line"><span class="hero__in" style="--d:2">delivered to</span></span>
-        <span class="line"><span class="hero__in grad-text" style="--d:3">your driveway.</span></span>
+        <span class="line"><span class="hero__in accent" style="--d:3">your driveway.</span></span>
       </h1>
       <p class="hero__lead hero__in" style="--d:4">Premium mobile valeting across <strong>Louth, Cavan, Meath &amp; Monaghan</strong>. Eco-friendly products, ECO-steaming and a finish you'll want to show off. Packages from <strong>€110</strong>.</p>
       <div class="hero__cta hero__in" style="--d:5">
-        <a href="#book" class="btn btn--primary btn--lg magnetic" data-wipe>Book now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a href="https://wa.me/353852724902?text=Hi%20RealShine%2C%20I%27d%20like%20to%20book%20a%20valet." class="btn btn--wa btn--lg magnetic" target="_blank" rel="noopener">
+        <a href="#book" class="btn btn--white btn--lg" data-wipe>Book now <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="https://wa.me/353852724902?text=Hi%20RealShine%2C%20I%27d%20like%20to%20book%20a%20valet." class="btn btn--wa btn--lg" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-fill"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
           WhatsApp us
         </a>
@@ -144,7 +143,7 @@
     </div>
 
     <div class="hero__visual hero__in" style="--d:3">
-      <div class="hero__frame tilt">
+      <div class="hero__frame">
         <img src="img/mercedes-c-class-exterior-1080.webp"
              srcset="img/mercedes-c-class-exterior-600.webp 600w, img/mercedes-c-class-exterior-1080.webp 1080w"
              sizes="(min-width: 900px) 45vw, 100vw" width="1080" height="1440"
@@ -158,16 +157,11 @@
   </div>
 
   <a href="#trust" class="scroll-cue" aria-label="Scroll down" data-wipe><span></span></a>
+  <svg class="wave wave--hero" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 64C180 20 360 10 540 40S900 110 1080 88 1320 30 1440 50V120H0Z"/></svg>
 </section>
 
 <!-- ============ TRUST STRIP ============ -->
 <section class="trust" id="trust" aria-label="Why RealShine">
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Mobile service</span><i>✦</i><span>Eco-friendly products</span><i>✦</i><span>ECO-steaming</span><i>✦</i><span>Card · Apple Pay · Google Pay</span><i>✦</i><span>Louth · Cavan · Meath · Monaghan</span><i>✦</i>
-      <span>Mobile service</span><i>✦</i><span>Eco-friendly products</span><i>✦</i><span>ECO-steaming</span><i>✦</i><span>Card · Apple Pay · Google Pay</span><i>✦</i><span>Louth · Cavan · Meath · Monaghan</span><i>✦</i>
-    </div>
-  </div>
   <div class="container trust__grid">
     <div class="trust__item reveal">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h2m14 0h2M5 17a2 2 0 1 0 4 0 2 2 0 1 0-4 0m10 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0M9 17h6M3 17v-4l2-5h9l4 5h3v4"/></svg>
@@ -268,7 +262,7 @@
     </header>
 
     <div class="plans">
-      <article class="plan reveal tilt">
+      <article class="plan reveal">
         <div class="plan__shine" aria-hidden="true"></div>
         <h3 class="plan__name">Vital</h3>
         <p class="plan__time">Approx. 1–2 hours</p>
@@ -284,7 +278,7 @@
         <a href="#book" class="btn btn--ghost btn--block" data-wipe data-package="Vital">Book Vital</a>
       </article>
 
-      <article class="plan plan--featured reveal tilt" style="--rd:1">
+      <article class="plan plan--featured reveal" style="--rd:1">
         <div class="plan__shine" aria-hidden="true"></div>
         <span class="plan__badge">Most popular</span>
         <h3 class="plan__name">Silver</h3>
@@ -301,7 +295,7 @@
         <a href="#book" class="btn btn--primary btn--block" data-wipe data-package="Silver">Book Silver</a>
       </article>
 
-      <article class="plan reveal tilt" style="--rd:2">
+      <article class="plan reveal" style="--rd:2">
         <div class="plan__shine" aria-hidden="true"></div>
         <h3 class="plan__name">Platinum</h3>
         <p class="plan__time">Approx. 3 hours</p>
@@ -353,18 +347,18 @@
     </header>
     <ol class="steps">
       <li class="step reveal">
-        <span class="step__num">01</span>
-        <h3>Book</h3>
+        <span class="step__num" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3h8M9 3v3m6-3v3M5 8h14v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2zM9 13l2 2 4-4"/></svg></span>
+        <span class="step__n">Step 1</span><h3>Book</h3>
         <p>Call, WhatsApp or send the form. Pick your package and a day that suits.</p>
       </li>
       <li class="step reveal" style="--rd:1">
-        <span class="step__num">02</span>
-        <h3>We arrive at your door</h3>
+        <span class="step__num" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 17h2m14 0h2M5 17a2 2 0 1 0 4 0 2 2 0 1 0-4 0m10 0a2 2 0 1 0 4 0 2 2 0 1 0-4 0M9 17h6M3 17v-4l2-5h9l4 5h3v4"/></svg></span>
+        <span class="step__n">Step 2</span><h3>We arrive at your door</h3>
         <p>We bring the water, power and eco kit. You carry on with your day.</p>
       </li>
       <li class="step reveal" style="--rd:2">
-        <span class="step__num">03</span>
-        <h3>Drive away spotless</h3>
+        <span class="step__num" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18 9l-4.2 1.4L12 15l-1.8-4.6L6 9l4.2-1.4zM18 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8zM6 16l.6 1.4 1.4.6-1.4.6L6 20l-.6-1.4L4 18l1.4-.6z"/></svg></span>
+        <span class="step__n">Step 3</span><h3>Drive away spotless</h3>
         <p>Inspect the finish, pay by card or phone, and enjoy that new-car feeling.</p>
       </li>
     </ol>
@@ -376,7 +370,7 @@
   <div class="work__sticky">
     <div class="container work__head">
       <p class="eyebrow">Our work</p>
-      <h2 class="section__title">Finished &amp; <span class="grad-text">gleaming</span></h2>
+      <h2 class="section__title">Finished &amp; <span class="accent">gleaming</span></h2>
       <p class="work__hint">Keep scrolling <span aria-hidden="true">→</span></p>
     </div>
     <div class="work__track" id="workTrack">
@@ -474,7 +468,8 @@
 
 <!-- ============ BOOKING ============ -->
 <section class="section book" id="book">
-  <div class="book__glow" aria-hidden="true"></div>
+  <svg class="wave wave--book" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 50C200 100 420 110 640 70S1040 0 1240 30 1440 80 1440 80V0H0Z"/></svg>
+  <div class="bubbles bubbles--soft" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="container book__grid">
     <div class="book__info">
       <p class="eyebrow reveal">Book your next valet</p>
@@ -530,7 +525,7 @@
         <textarea id="f-notes" name="notes" rows="3" placeholder="e.g. dog hair in the boot, address/Eircode…"></textarea>
       </div>
       <p class="form__error" id="formError" role="alert"></p>
-      <button class="btn btn--primary btn--lg btn--block magnetic" type="submit">
+      <button class="btn btn--primary btn--lg btn--block" type="submit">
         Send via WhatsApp <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
     </form>
@@ -541,6 +536,7 @@
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
+  <svg class="wave wave--footer" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30C240 70 480 70 720 40S1200 0 1440 30V0H0Z"/></svg>
   <div class="container footer__grid">
     <div>
       <a href="#top" class="brand brand--footer" data-wipe aria-label="RealShine — back to top"><img class="brand__logo" src="img/realshine-logo.png" width="168" height="74" alt="RealShine" loading="lazy"></a>

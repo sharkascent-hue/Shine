@@ -9,28 +9,51 @@
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
   /* ------------------------------------------------------------------
-     1. Intro: car draws in, wordmark rises, panels split open
+     1. Water wash — a wave rises over the screen, runs `mid` while the
+        screen is covered, then carries on up and away.
      ------------------------------------------------------------------ */
+  const wash = $('#wash');
+  let washing = false;
+  const runWash = mid => {
+    if (reduced || !wash || washing) { mid(); return; }
+    washing = true;
+    wash.classList.remove('is-out');
+    void wash.offsetWidth;
+    wash.classList.add('is-in');
+    setTimeout(() => {
+      mid();
+      requestAnimationFrame(() => {
+        wash.classList.add('is-out');
+        wash.classList.remove('is-in');
+        setTimeout(() => {
+          wash.style.transition = 'none';
+          wash.classList.remove('is-out');
+          void wash.offsetWidth;
+          wash.style.transition = '';
+          washing = false;
+        }, 800);
+      });
+    }, 620);
+  };
+
+  /* Intro: logo pops in on foam with bubbles, then the wave washes it away */
   const intro = $('#intro');
   let seen = false;
   try { seen = sessionStorage.getItem('rs-intro') === '1'; sessionStorage.setItem('rs-intro', '1'); } catch (e) {}
-
+  let revealed = false;
   const reveal = () => {
-    if (!intro || intro.classList.contains('is-done')) return;
-    intro.classList.add('is-done');
-    root.classList.add('is-loaded');
-    setTimeout(() => intro.classList.add('is-gone'), 1100);
+    if (revealed) return;
+    revealed = true;
+    runWash(() => {
+      intro && intro.classList.add('is-gone');
+      root.classList.add('is-loaded');
+    });
   };
-
   if (reduced || !intro) {
     root.classList.add('is-loaded');
     intro && intro.classList.add('is-gone');
   } else {
-    // Full show on first visit, quick flash on repeat visits.
-    const minTime = seen ? 500 : 1900;
-    const start = performance.now();
-    // Don't wait for every image (slow on 4G) — the DOM is ready, go after the animation.
-    setTimeout(reveal, Math.max(0, minTime - (performance.now() - start)));
+    setTimeout(reveal, seen ? 600 : 2100);
     intro.addEventListener('click', reveal);
   }
 
@@ -171,44 +194,10 @@
   }
 
   /* ------------------------------------------------------------------
-     7. Tilt + spotlight on cards, magnetic buttons (fine pointers only)
-     ------------------------------------------------------------------ */
-  const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (fine && !reduced) {
-    $$('.tilt').forEach(card => {
-      const max = card.classList.contains('hero__frame') ? 6 : 5;
-      card.addEventListener('pointermove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-        card.style.setProperty('--mx', x * 100 + '%');
-        card.style.setProperty('--my', y * 100 + '%');
-        card.style.setProperty('--rx', ((.5 - y) * max).toFixed(2) + 'deg');
-        card.style.setProperty('--ry', ((x - .5) * max).toFixed(2) + 'deg');
-        if (card.classList.contains('hero__frame'))
-          card.style.transform = `perspective(1200px) rotateX(${(.5 - y) * max}deg) rotateY(${(x - .5) * max}deg)`;
-      });
-      card.addEventListener('pointerleave', () => {
-        card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg');
-        if (card.classList.contains('hero__frame')) card.style.transform = '';
-      });
-    });
-
-    $$('.magnetic').forEach(btn => {
-      btn.addEventListener('pointermove', e => {
-        const r = btn.getBoundingClientRect();
-        btn.style.setProperty('--bx', (e.clientX - r.left - r.width / 2) * .25 + 'px');
-        btn.style.setProperty('--by', (e.clientY - r.top - r.height / 2) * .35 + 'px');
-      });
-      btn.addEventListener('pointerleave', () => { btn.style.setProperty('--bx', '0px'); btn.style.setProperty('--by', '0px'); });
-    });
-  }
-
-  /* ------------------------------------------------------------------
-     8. Scroll-driven bits: progress bar, header, hero parallax,
+     7. Scroll-driven bits: header, hero parallax,
         horizontal "Our work" track gliding left → right
      ------------------------------------------------------------------ */
   const header = $('#header');
-  const progress = $('#progress');
   const heroImg = $('.hero__frame img');
   const work = $('#work');
   const track = $('#workTrack');
@@ -226,10 +215,6 @@
 
   const onScroll = () => {
     const y = window.scrollY;
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
-
-    header.classList.toggle('is-scrolled', y > 20);
     header.classList.toggle('is-hidden', y > lastY && y > 500 && !$('#nav').classList.contains('is-open'));
     lastY = y;
 
@@ -261,7 +246,7 @@
   navLinks.forEach(a => { const s = $(a.getAttribute('href')); s && secIO.observe(s); });
 
   /* ------------------------------------------------------------------
-     9. Mobile menu
+     8. Mobile menu
      ------------------------------------------------------------------ */
   const burger = $('#burger'), nav = $('#nav');
   const setMenu = open => {
@@ -276,10 +261,8 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { setMenu(false); closeLightbox(); } });
 
   /* ------------------------------------------------------------------
-     10. Shine-wipe page transition for in-page links
+     9. Water-wash transition for in-page links
      ------------------------------------------------------------------ */
-  const wipe = $('#wipe');
-  let wiping = false;
   $$('a[data-wipe]').forEach(a => a.addEventListener('click', e => {
     const id = a.getAttribute('href');
     const target = id === '#top' ? document.body : $(id);
@@ -289,38 +272,17 @@
     // pre-select a package in the form when a "Book X" button was used
     if (a.dataset.package) { const sel = $('#f-package'); if (sel) sel.value = a.dataset.package; }
 
-    const wasOpen = nav.classList.contains('is-open');
-    const jump = () => {
+    runWash(() => {
       setMenu(false);
-      const y = id === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY - (id === '#work' ? 0 : 64);
+      const y = id === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY - (id === '#work' ? 0 : 70);
       window.scrollTo({ top: y, behavior: 'auto' });
       history.replaceState(null, '', id === '#top' ? location.pathname : id);
-    };
-
-    if (reduced || wiping) { jump(); return; }
-    wiping = true;
-    wipe.classList.remove('is-out');
-    void wipe.offsetWidth;
-    wipe.classList.add('is-in');
-    setTimeout(() => {
-      jump();
-      if (!wasOpen) header.classList.remove('is-hidden');
-      requestAnimationFrame(() => {
-        wipe.classList.add('is-out');
-        wipe.classList.remove('is-in');
-        setTimeout(() => {
-          wipe.style.transition = 'none';
-          wipe.classList.remove('is-out');
-          void wipe.offsetWidth;
-          wipe.style.transition = '';
-          wiping = false;
-        }, 650);
-      });
-    }, 520);
+      header.classList.remove('is-hidden');
+    });
   }));
 
   /* ------------------------------------------------------------------
-     11. FAQ — animate open & close of <details>
+     10. FAQ — animate open & close of <details>
      ------------------------------------------------------------------ */
   $$('.qa').forEach(d => {
     const sum = $('summary', d);
@@ -343,7 +305,7 @@
   });
 
   /* ------------------------------------------------------------------
-     12. Gallery lightbox
+     11. Gallery lightbox
      ------------------------------------------------------------------ */
   const lb = $('#lightbox');
   const lbImg = $('img', lb);
@@ -367,7 +329,7 @@
   lb.addEventListener('click', e => { if (e.target !== lbImg) closeLightbox(); });
 
   /* ------------------------------------------------------------------
-     13. Booking form → pre-filled WhatsApp message
+     12. Booking form → pre-filled WhatsApp message
      ------------------------------------------------------------------ */
   const form = $('#bookForm');
   const err = $('#formError');
