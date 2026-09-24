@@ -29,9 +29,8 @@
     // Full show on first visit, quick flash on repeat visits.
     const minTime = seen ? 500 : 1900;
     const start = performance.now();
-    const go = () => setTimeout(reveal, Math.max(0, minTime - (performance.now() - start)));
-    if (document.readyState === 'complete') go(); else window.addEventListener('load', go, { once: true });
-    setTimeout(reveal, 4000);           // never hold the page hostage
+    // Don't wait for every image (slow on 4G) — the DOM is ready, go after the animation.
+    setTimeout(reveal, Math.max(0, minTime - (performance.now() - start)));
     intro.addEventListener('click', reveal);
   }
 
@@ -243,10 +242,6 @@
       const p = clamp((y - top) / travel, 0, 1);
       // start showing the right-hand end, glide the pictures rightwards
       track.style.transform = `translate3d(${-travel * (1 - p)}px,0,0)`;
-      $$('.shot img', track).forEach((img, i, all) => {
-        const shift = ((p - i / all.length) * 30).toFixed(1);
-        img.style.transform = `scale(1.12) translateX(${clamp(shift, -30, 30)}px)`;
-      });
     }
     ticking = false;
   };
@@ -274,6 +269,8 @@
     burger.setAttribute('aria-expanded', open);
     burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     document.body.classList.toggle('is-locked', open);
+    header.classList.toggle('menu-open', open);
+    if (open) header.classList.remove('is-hidden');
   };
   burger.addEventListener('click', () => setMenu(!nav.classList.contains('is-open')));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { setMenu(false); closeLightbox(); } });

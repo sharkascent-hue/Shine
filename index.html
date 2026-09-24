@@ -18,7 +18,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
@@ -77,18 +77,7 @@
   <div class="intro__panel intro__panel--bottom"></div>
   <div class="intro__stage">
     <div class="intro__bubbles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <svg class="intro__car" viewBox="0 0 240 90" aria-hidden="true">
-      <defs>
-        <linearGradient id="carGradIntro" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#4DA3FF"/><stop offset=".55" stop-color="#0A5CFF"/><stop offset="1" stop-color="#0140A0"/>
-        </linearGradient>
-      </defs>
-      <path class="car-body" d="M20 62C22 52 40 48 58 46L84 30C92 25 104 23 120 23H150C162 23 172 27 182 34L196 44C212 46 222 50 224 58V64C224 67 222 68 219 68H206A14 14 0 0 0 178 68H78A14 14 0 0 0 50 68H26C22 68 20 66 20 62Z" fill="url(#carGradIntro)"/>
-      <path class="car-glass" d="M92 44L106 32C112 28 118 27 130 27L132 44ZM139 44L138 27H150C160 27 168 31 177 42Z"/>
-      <circle class="car-wheel" cx="64" cy="68" r="11"/><circle class="car-wheel" cx="192" cy="68" r="11"/>
-      <path class="car-wave" d="M6 82C60 70 112 94 234 74"/>
-    </svg>
-    <div class="intro__word"><span>REAL</span><b>SHINE</b><em class="intro__glint"></em></div>
+    <div class="intro__logo"><img src="img/realshine-logo.png" width="224" height="98" alt=""><em class="intro__glint"></em></div>
     <div class="intro__bar"><span></span></div>
   </div>
 </div>
@@ -104,19 +93,7 @@
 <header class="header" id="header">
   <div class="container header__inner">
     <a href="#top" class="brand" aria-label="RealShine home">
-      <svg class="brand__car" viewBox="0 0 240 90" aria-hidden="true">
-        <defs>
-          <linearGradient id="carGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#4DA3FF"/><stop offset=".55" stop-color="#0A5CFF"/><stop offset="1" stop-color="#0140A0"/>
-          </linearGradient>
-        </defs>
-        <path d="M20 62C22 52 40 48 58 46L84 30C92 25 104 23 120 23H150C162 23 172 27 182 34L196 44C212 46 222 50 224 58V64C224 67 222 68 219 68H206A14 14 0 0 0 178 68H78A14 14 0 0 0 50 68H26C22 68 20 66 20 62Z" fill="url(#carGrad)"/>
-        <path d="M92 44L106 32C112 28 118 27 130 27L132 44ZM139 44L138 27H150C160 27 168 31 177 42Z" fill="#0B0F19" opacity=".85"/>
-        <circle cx="64" cy="68" r="11" fill="#0B0F19" stroke="#86BADD" stroke-width="3"/><circle cx="192" cy="68" r="11" fill="#0B0F19" stroke="#86BADD" stroke-width="3"/>
-        <circle cx="42" cy="18" r="7" fill="none" stroke="#86BADD" stroke-width="2.5"/><circle cx="58" cy="8" r="4" fill="none" stroke="#86BADD" stroke-width="2"/><circle cx="28" cy="30" r="3.5" fill="none" stroke="#86BADD" stroke-width="2"/>
-        <path d="M6 82C60 70 112 94 234 74" fill="none" stroke="#4DA3FF" stroke-width="4" stroke-linecap="round"/>
-      </svg>
-      <span class="brand__word">REAL<b>SHINE</b></span>
+      <img class="brand__logo" src="img/realshine-logo.png" width="112" height="49" alt="RealShine">
     </a>
 
     <nav class="nav" id="nav" aria-label="Main">
@@ -566,7 +543,7 @@
 <footer class="footer">
   <div class="container footer__grid">
     <div>
-      <a href="#top" class="brand brand--footer" data-wipe aria-label="RealShine — back to top"><span class="brand__word">REAL<b>SHINE</b></span></a>
+      <a href="#top" class="brand brand--footer" data-wipe aria-label="RealShine — back to top"><img class="brand__logo" src="img/realshine-logo.png" width="168" height="74" alt="RealShine" loading="lazy"></a>
       <p>Premium mobile car detailing across Louth, Cavan, Meath &amp; Monaghan. We come to you.</p>
     </div>
     <nav aria-label="Footer">
