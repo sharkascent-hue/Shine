@@ -194,46 +194,45 @@
   }
 
   /* ------------------------------------------------------------------
-     7. Scroll-driven bits: header, hero parallax,
-        horizontal "Our work" track gliding left → right
+     7. Header hides on scroll-down, returns on scroll-up
      ------------------------------------------------------------------ */
   const header = $('#header');
-  const heroImg = $('.hero__frame img');
-  const work = $('#work');
-  const track = $('#workTrack');
-  const sticky = work && $('.work__sticky', work);
-  let lastY = window.scrollY, travel = 0, ticking = false;
-
-  const horizontal = !reduced && 'IntersectionObserver' in window;
-  if (!horizontal && work) work.classList.add('is-static');
-
-  const sizeWork = () => {
-    if (!horizontal || !work) return;
-    travel = Math.max(0, track.scrollWidth - window.innerWidth);
-    work.style.height = (sticky.offsetHeight + travel) + 'px';
-  };
-
+  let lastY = window.scrollY, ticking = false;
   const onScroll = () => {
     const y = window.scrollY;
     header.classList.toggle('is-hidden', y > lastY && y > 500 && !$('#nav').classList.contains('is-open'));
     lastY = y;
-
-    if (!reduced && heroImg && y < window.innerHeight * 1.2) {
-      heroImg.style.transform = `translateY(${y * 0.12}px) scale(${1.06 + y * 0.00012})`;
-    }
-
-    if (horizontal && work && travel > 0) {
-      const top = work.offsetTop;
-      const p = clamp((y - top) / travel, 0, 1);
-      // start showing the right-hand end, glide the pictures rightwards
-      track.style.transform = `translate3d(${-travel * (1 - p)}px,0,0)`;
-    }
     ticking = false;
   };
   window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
-  window.addEventListener('resize', () => { sizeWork(); onScroll(); });
-  window.addEventListener('load', () => { sizeWork(); onScroll(); });
-  sizeWork(); onScroll();
+
+  /* "Our work" — swipe left/right carousel with arrow buttons */
+  const track = $('#workTrack');
+  if (track) {
+    const step = () => ($('.shot', track).offsetWidth + 18) * (window.innerWidth >= 900 ? 2 : 1);
+    const prev = $('.work__prev'), next = $('.work__next');
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth - 4;
+      prev && (prev.disabled = track.scrollLeft <= 4);
+      next && (next.disabled = track.scrollLeft >= max);
+    };
+    prev && prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: reduced ? 'auto' : 'smooth' }));
+    next && next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: reduced ? 'auto' : 'smooth' }));
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+
+    // one gentle nudge when it first comes into view, to show it swipes
+    if (!reduced) {
+      const nudgeIO = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        nudgeIO.disconnect();
+        track.classList.add('is-nudging');
+        setTimeout(() => track.classList.remove('is-nudging'), 1400);
+      }, { threshold: 0.6 });
+      nudgeIO.observe(track);
+    }
+  }
 
   /* current-section highlight in nav */
   const navLinks = $$('.nav a[href^="#"]:not(.btn)');
@@ -274,7 +273,7 @@
 
     runWash(() => {
       setMenu(false);
-      const y = id === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY - (id === '#work' ? 0 : 70);
+      const y = id === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY - 70;
       window.scrollTo({ top: y, behavior: 'auto' });
       history.replaceState(null, '', id === '#top' ? location.pathname : id);
       header.classList.remove('is-hidden');

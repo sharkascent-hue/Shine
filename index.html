@@ -90,7 +90,7 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <!-- ============ HEADER ============ -->
-<header class="header is-scrolled" id="header">
+<header class="header" id="header">
   <div class="container header__inner">
     <a href="#top" class="brand" aria-label="RealShine home">
       <img class="brand__logo" src="img/realshine-logo.png" width="112" height="49" alt="RealShine">
@@ -366,14 +366,19 @@
 </section>
 
 <!-- ============ OUR WORK (horizontal scroll) ============ -->
-<section class="work" id="work">
-  <div class="work__sticky">
-    <div class="container work__head">
-      <p class="eyebrow">Our work</p>
+<section class="section work" id="work">
+  <div class="container work__head">
+    <div>
+      <p class="eyebrow reveal">Our work</p>
       <h2 class="section__title">Finished &amp; <span class="accent">gleaming</span></h2>
-      <p class="work__hint">Keep scrolling <span aria-hidden="true">→</span></p>
+      <p class="work__hint">Swipe to see more <span aria-hidden="true">→</span></p>
     </div>
-    <div class="work__track" id="workTrack">
+    <div class="work__nav">
+      <button type="button" class="work__prev" aria-label="Previous photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button type="button" class="work__next" aria-label="Next photos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  </div>
+  <div class="work__track" id="workTrack">
       <button class="shot" type="button" data-full="img/mercedes-c-class-exterior-1080.webp">
         <img src="img/mercedes-c-class-exterior-600.webp" width="600" height="800" loading="lazy" decoding="async" alt="Mercedes C-Class exterior, freshly washed and glossy">
         <span class="shot__cap">Mercedes C-Class · Exterior</span>
@@ -398,7 +403,6 @@
         <img src="img/vw-polo-interior-600.webp" width="600" height="800" loading="lazy" decoding="async" alt="Volkswagen Polo interior after a full valet">
         <span class="shot__cap">VW Polo · Interior</span>
       </button>
-    </div>
   </div>
 </section>
 
